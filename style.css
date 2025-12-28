@@ -16,3 +16,33 @@ body {
   font-weight: bold;
   margin: 10px;
 }
+.game-body {
+  background: linear-gradient(to bottom, #0f2027, #203a43, #2c5364);
+  margin: 0;
+  padding: 0;
+}
+
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 15px;
+  font-size: 18px;
+  background: rgba(0,0,0,0.4);
+}
+
+.stars {
+  color: gold;
+}
+
+#gameCanvas {
+  display: block;
+  margin: 10px auto;
+  background: radial-gradient(circle at top, #3a7bd5, #3a6073);
+  border-radius: 12px;
+}
+
+.bottom-bar {
+  text-align: center;
+  padding: 10px;
+  font-size: 16px;
+}
