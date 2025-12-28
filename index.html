@@ -66,8 +66,9 @@
   <div class="grid">
     <div class="card">
       <h3>Tap Game</h3>
-      <p>Tap the button to earn points.</p>
-      <button class="btn" onclick="addPoints(5)">Tap & Earn +5</button>
+      <p>Tap the circle as many times as you can.</p>
+      <div id="tapCircle" onclick="tapGame()" style="width:120px;height:120px;border-radius:50%;background:#00ff99;margin:15px auto;display:flex;align-items:center;justify-content:center;color:#000;font-weight:bold;">TAP</div>
+      <p id="tapCount">Taps: 0</p>
     </div><div class="card">
   <h3>Lucky Click</h3>
   <p>Try your luck to earn points.</p>
@@ -107,4 +108,4 @@
     document.getElementById('points').innerText = points;
   }
 </script></body>
-</html>
+    </html>
