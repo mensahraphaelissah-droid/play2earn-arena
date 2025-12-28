@@ -4,108 +4,105 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Play2Earn Arena</title>
   <style>
-    body{
-      margin:0;
-      font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background:#0b0f19;
-      color:#ffffff;
-    }
-    header{
-      background:linear-gradient(135deg,#6a11cb,#2575fc);
-      padding:60px 20px;
-      text-align:center;
-    }
-    header h1{font-size:3rem;margin-bottom:10px;}
-    header p{font-size:1.1rem;max-width:750px;margin:auto;}
-    .btn{
-      display:inline-block;
-      margin-top:20px;
-      padding:14px 35px;
-      background:#00ff99;
-      color:#000;
-      text-decoration:none;
-      font-weight:bold;
-      border-radius:30px;
-      cursor:pointer;
-    }
-    section{padding:50px 20px;max-width:1100px;margin:auto;}
-    h2{text-align:center;margin-bottom:35px;font-size:2.2rem;}
-    .grid{
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-      gap:25px;
-    }
-    .card{
-      background:#141a2e;
-      padding:30px;
-      border-radius:18px;
-      box-shadow:0 15px 40px rgba(0,0,0,0.5);
-      text-align:center;
-    }
-    .card h3{color:#00ff99;margin-bottom:10px;}
-    .points{
-      text-align:center;
-      font-size:1.3rem;
-      margin:20px 0;
-    }
-    footer{
-      background:#050814;
-      text-align:center;
-      padding:40px 20px;
-    }
+    body{margin:0;font-family:'Segoe UI',Tahoma,Verdana,sans-serif;background:#0b0f19;color:#fff}
+    header{background:linear-gradient(135deg,#6a11cb,#2575fc);padding:50px 20px;text-align:center}
+    header h1{font-size:2.8rem;margin:0}
+    header p{max-width:700px;margin:10px auto}
+    a.btn,button.btn{display:inline-block;padding:14px 30px;background:#00ff99;color:#000;font-weight:bold;border-radius:30px;text-decoration:none;border:none;cursor:pointer}
+    section{padding:50px 20px;max-width:1100px;margin:auto}
+    h2{text-align:center;margin-bottom:30px}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:25px}
+    .card{background:#141a2e;padding:25px;border-radius:18px;box-shadow:0 10px 30px rgba(0,0,0,.5);text-align:center}
+    footer{background:#050814;text-align:center;padding:40px 20px}
+    .points{text-align:center;font-size:1.2rem;margin:20px}/* Tap game */
+#gameArea{position:relative;height:400px;background:#0f1530;border-radius:15px;overflow:hidden}
+.coin{position:absolute;width:60px;height:60px;border-radius:50%;background:gold;display:flex;align-items:center;justify-content:center;font-weight:bold;color:#000;cursor:pointer}
+.meter{height:25px;background:#333;border-radius:15px;overflow:hidden;margin-top:15px}
+.meter-fill{height:100%;width:0%;background:linear-gradient(90deg,#00ff99,#ff9800)}
+
   </style>
 </head>
 <body><header>
   <h1>Play2Earn Arena</h1>
-  <p>Play simple games, earn points, and redeem manually via WhatsApp. No fake promises — just fun and rewards.</p>
-  <a class="btn" href="#games">Start Playing</a>
-</header><div class="points">
-  Your Points: <span id="points">0</span>
-</div><section id="games">
-  <h2>Play Games</h2>
+  <p>Play games, earn points, and redeem manually via WhatsApp. Entertainment-based reward platform.</p>
+  <a href="#games" class="btn">Start Playing</a>
+</header><div class="points">Your Points: <span id="points">0</span></div><section id="games">
+  <h2>Select a Game</h2>
   <div class="grid">
     <div class="card">
-      <h3>Tap Game</h3>
-      <p>Tap the circle as many times as you can.</p>
-      <div id="tapCircle" onclick="tapGame()" style="width:120px;height:120px;border-radius:50%;background:#00ff99;margin:15px auto;display:flex;align-items:center;justify-content:center;color:#000;font-weight:bold;">TAP</div>
-      <p id="tapCount">Taps: 0</p>
-    </div><div class="card">
-  <h3>Lucky Click</h3>
-  <p>Try your luck to earn points.</p>
-  <button class="btn" onclick="addPoints(10)">Play & Earn +10</button>
-</div>
-
-<div class="card">
-  <h3>Quiz Game</h3>
-  <p>Answer simple questions (demo).</p>
-  <button class="btn" onclick="addPoints(15)">Answer & Earn +15</button>
-</div>
-
+      <h3>Tap Coin Game</h3>
+      <p>Tap floating coins to increase your points meter.</p>
+      <a href="#tapgame" class="btn">Play Now</a>
+    </div>
+    <div class="card">
+      <h3>More Games</h3>
+      <p>More games coming soon.</p>
+      <button class="btn" disabled>Locked</button>
+    </div>
   </div>
-</section><section>
-  <h2>How It Works</h2>
-  <div class="grid">
-    <div class="card"><p>1️⃣ Play games on this website.</p></div>
-    <div class="card"><p>2️⃣ Earn points automatically.</p></div>
-    <div class="card"><p>3️⃣ When ready, redeem via WhatsApp.</p></div>
-  </div>
-</section><section>
-  <h2>Redeem Points</h2>
-  <div class="card">
-    <p>When you reach enough points, contact support for manual redemption.</p>
+</section><section id="tapgame">
+  <h2>Tap Coin Game</h2>
+  <p style="text-align:center">Tap the coins. Meter goes up fast but drops as you approach reward levels.</p>  <div id="gameArea"></div>  <div class="meter">
+    <div class="meter-fill" id="meterFill"></div>
+  </div>  <p style="text-align:center;margin-top:10px">Meter Value: <span id="meterValue">0</span></p>  <div class="card" style="margin-top:25px">
+    <h3>Reward Levels (Manual)</h3>
+    <p>1,000,000 points → ₵5 Airtime</p>
+    <p>4,000,000 points → ₵7 Airtime</p>
+    <p>6,000,000 points → ₵10 Airtime</p>
+    <p style="font-size:.9rem;opacity:.8">Rewards are manual and subject to verification.</p>
     <a class="btn" href="https://wa.me/233547740795" target="_blank">Redeem on WhatsApp</a>
   </div>
 </section><footer>
   <p>&copy; 2025 Play2Earn Arena</p>
   <p>Support: 0547740795</p>
 </footer><script>
-  let points = localStorage.getItem('points') || 0;
-  document.getElementById('points').innerText = points;
+  let points = parseInt(localStorage.getItem('points') || 0);
+  let meter = parseInt(localStorage.getItem('meter') || 0);
+  const maxMeter = 6000000;
 
-  function addPoints(value){
-    points = parseInt(points) + value;
-    localStorage.setItem('points', points);
-    document.getElementById('points').innerText = points;
+  const pointsEl = document.getElementById('points');
+  const meterEl = document.getElementById('meterValue');
+  const fillEl = document.getElementById('meterFill');
+  const gameArea = document.getElementById('gameArea');
+
+  function updateUI(){
+    pointsEl.innerText = points;
+    meterEl.innerText = meter;
+    fillEl.style.width = Math.min((meter/maxMeter)*100,100) + '%';
+    localStorage.setItem('points',points);
+    localStorage.setItem('meter',meter);
   }
+
+  function spawnCoin(){
+    const coin = document.createElement('div');
+    coin.className = 'coin';
+    coin.innerText = '+';
+    coin.style.left = Math.random()*(gameArea.clientWidth-60)+'px';
+    coin.style.top = Math.random()*(gameArea.clientHeight-60)+'px';
+
+    coin.onclick = () =>{
+      let gain = 5000;
+      if(meter > 800000) gain = 2000;
+      if(meter > 3000000) gain = 800;
+      if(meter > 5000000) gain = 200;
+      meter += gain;
+      points += 1;
+      coin.remove();
+      updateUI();
+    };
+
+    gameArea.appendChild(coin);
+    setTimeout(()=>coin.remove(),2000);
+  }
+
+  setInterval(()=>{
+    if(document.getElementById('tapgame')){
+      spawnCoin();
+      meter = Math.max(0,meter-1500); // natural decrease
+      updateUI();
+    }
+  },800);
+
+  updateUI();
 </script></body>
-    </html>
+</html>
