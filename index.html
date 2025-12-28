@@ -1,83 +1,16 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bubble Rewards Arena</title>
-<style>
-body{margin:0;font-family:Arial,Helvetica,sans-serif;background:linear-gradient(180deg,#1a2a6c,#b21f1f,#fdbb2d);color:#fff;overflow:hidden}
-header{padding:15px;text-align:center;font-weight:bold;font-size:20px;background:rgba(0,0,0,.3)}
-#game{position:relative;width:100%;height:calc(100vh - 60px)}
-#bubbleGrid{position:absolute;top:0;left:0;right:0;height:55%;display:flex;flex-wrap:wrap;justify-content:center;padding-top:10px}
-.bubble{width:40px;height:40px;border-radius:50%;margin:4px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:bold}
-.red{background:#ff4d4d}.blue{background:#4da6ff}.green{background:#4dff88}.yellow{background:#ffd24d}.purple{background:#c77dff}
-#launcherArea{position:absolute;bottom:0;left:0;right:0;height:45%;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;padding-bottom:20px}
-#aimLine{height:120px;width:4px;background:rgba(255,255,255,.6);margin-bottom:10px;border-radius:2px}
-#currentBubble,#nextBubble{width:45px;height:45px;border-radius:50%;margin:5px}
-#launcher{display:flex;align-items:center}
-#hud{display:flex;justify-content:space-between;padding:10px;font-size:14px}
-#meter{height:18px;background:#222;border-radius:10px;overflow:hidden;margin:5px 15px}
-#meterFill{height:100%;width:0%;background:linear-gradient(90deg,#00ff99,#ff9800)}
-#popup{position:fixed;inset:0;background:rgba(0,0,0,.7);display:none;align-items:center;justify-content:center}
-#popupBox{background:#141a2e;padding:25px;border-radius:18px;text-align:center;max-width:320px}
-button{border:none;border-radius:25px;padding:12px 20px;font-weight:bold;cursor:pointer}
-.btn{background:#00ff99;color:#000;margin:5px}
-</style>
+  <meta charset="UTF-8">
+  <title>Mix Rewards</title>
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-<header>Bubble Rewards Arena</header>
-<div id="hud">
-  <div>Shots Left: <span id="shots">39</span></div>
-  <div>⭐ ⭐ ⭐</div>
-</div>
-<div id="meter"><div id="meterFill"></div></div>
-<div id="game">
-  <div id="bubbleGrid"></div>
-  <div id="launcherArea">
-    <div id="aimLine"></div>
-    <div id="launcher">
-      <div id="currentBubble"></div>
-      <div id="nextBubble"></div>
-    </div>
-  </div>
-</div>
-<div id="popup">
-  <div id="popupBox">
-    <h3>🎉 Redeem Available</h3>
-    <p>You reached a reward level.</p>
-    <button class="btn" onclick="redeem()">Redeem Now</button><br>
-    <button class="btn" style="background:#555;color:#fff" onclick="closePopup()">Continue</button>
-  </div>
-</div>
-<audio id="bgm" loop src="https://cdn.pixabay.com/audio/2022/03/15/audio_4c9e7e5f3f.mp3"></audio>
-<audio id="tapSound" src="https://cdn.pixabay.com/audio/2022/03/15/audio_7c7d3e3a34.mp3"></audio>
-<script>
-const colors=['red','blue','green','yellow','purple'];
-let shots=39;
-let meter=parseInt(localStorage.getItem('meter')||0);
-const maxMeter=6000000;
-const rewards=[1000000,4000000,6000000];
-const grid=document.getElementById('bubbleGrid');
-const shotsEl=document.getElementById('shots');
-const meterFill=document.getElementById('meterFill');
-const popup=document.getElementById('popup');
-const bgm=document.getElementById('bgm');
-const tapSound=document.getElementById('tapSound');bgm.volume=0.3; bgm.play();
 
-function randColor(){return colors[Math.floor(Math.random()*colors.length)]}
+  <h1>🎮 Mix Rewards Arena</h1>
+  <p>Play games. Earn points. Redeem rewards.</p>
 
-function initGrid(){for(let i=0;i<60;i++){const b=document.createElement('div');b.className='bubble '+randColor();grid.appendChild(b)}}
-
-let current=randColor(); let next=randColor(); function drawLauncher(){currentBubble.className=current;nextBubble.className=next}
-
-function updateMeter(){meterFill.style.width=Math.min(meter/maxMeter*100,100)+'%';localStorage.setItem('meter',meter);if(rewards.includes(meter))popup.style.display='flex'}
-
-function shoot(){if(shots<=0)return;shots--;shotsEl.textContent=shots;tapSound.play();let gain=12000;if(meter>800000)gain=6000;if(meter>3000000)gain=2500;if(meter>5000000)gain=800;meter+=gain;updateMeter();current=next;next=randColor();drawLauncher()}
-
-function redeem(){window.open('https://wa.me/233547740795','_blank')} function closePopup(){popup.style.display='none'}
-
-document.getElementById('launcher').onclick=shoot;
-
-initGrid();drawLauncher();updateMeter(); </script>
+  <a href="games.html" class="btn">Start Playing</a>
 
 </body>
-</html>you 
+</html>
