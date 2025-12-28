@@ -2,15 +2,23 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Bubble Game</title>
+  <title>Bubble Rewards Arena</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
+<body class="game-body">
 
-  <h2>Bubble Rewards Arena</h2>
-  <p>Game loading...</p>
+  <div class="top-bar">
+    <span>Shots Left: <strong id="shots">40</strong></span>
+    <span class="stars">⭐ ⭐ ⭐</span>
+  </div>
 
-  <a href="games.html" class="btn">⬅ Back</a>
+  <canvas id="gameCanvas" width="360" height="520"></canvas>
 
+  <div class="bottom-bar">
+    <p>Tap & Aim to Shoot</p>
+    <a href="games.html" class="btn">⬅ Exit Game</a>
+  </div>
+
+  <script src="js/bubble.js"></script>
 </body>
 </html>
