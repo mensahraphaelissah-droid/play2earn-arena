@@ -1,24 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Bubble Rewards Arena</title>
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="style.css">
 </head>
-<body class="game-body">
+<body>
 
-  <div class="top-bar">
-    <span>Shots Left: <strong id="shots">40</strong></span>
-    <span class="stars">⭐ ⭐ ⭐</span>
+  <div id="gameUI">
+    <div id="topBar">
+      <span id="score">Points: 0</span>
+      <span id="meter">Progress: 0%</span>
+    </div>
+
+    <canvas id="gameCanvas"></canvas>
+
+    <button id="exitBtn" onclick="location.href='index.html'">
+      Exit Game
+    </button>
   </div>
 
-  <canvas id="gameCanvas" width="360" height="520"></canvas>
-
-  <div class="bottom-bar">
-    <p>Tap & Aim to Shoot</p>
-    <a href="games.html" class="btn">⬅ Exit Game</a>
-  </div>
-
-  <script src="js/bubble.js"></script>
+  <script src="bubble.js"></script>
 </body>
 </html>
