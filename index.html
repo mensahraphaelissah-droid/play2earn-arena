@@ -1,16 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Mix Rewards</title>
-  <link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bubble Rewards Arena</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-  <h1>🎮 Mix Rewards Arena</h1>
-  <p>Play games. Earn points. Redeem rewards.</p>
+  <div id="gameUI">
+    <div id="topBar">
+      <span id="score">Points: 0</span>
+      <span id="meter">Progress: 0%</span>
+    </div>
 
-  <a href="games.html" class="btn">Start Playing</a>
+    <canvas id="gameCanvas"></canvas>
 
+    <button id="exitBtn">Exit Game</button>
+  </div>
+
+  <script src="game.js"></script>
 </body>
 </html>
