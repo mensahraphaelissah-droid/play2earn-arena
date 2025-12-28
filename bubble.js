@@ -96,3 +96,28 @@ function gameLoop() {
 }
 
 gameLoop();
+function spawnBubble() {
+  bubbles.push(new Bubble());
+}
+
+function update() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  bubbles.forEach((bubble, index) => {
+    bubble.y -= bubble.speed;
+
+    ctx.beginPath();
+    ctx.arc(bubble.x, bubble.y, bubble.radius, 0, Math.PI * 2);
+    ctx.fillStyle = bubble.color;
+    ctx.fill();
+
+    if (bubble.y + bubble.radius < 0) {
+      bubbles.splice(index, 1);
+    }
+  });
+
+  requestAnimationFrame(update);
+}
+
+setInterval(spawnBubble, 800);
+update();
