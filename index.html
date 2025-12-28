@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en">
+ <!DOCTYPE html><html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -12,23 +12,24 @@
     }
     header{
       background:linear-gradient(135deg,#6a11cb,#2575fc);
-      padding:70px 20px;
+      padding:60px 20px;
       text-align:center;
     }
     header h1{font-size:3rem;margin-bottom:10px;}
-    header p{font-size:1.2rem;max-width:750px;margin:auto;}
+    header p{font-size:1.1rem;max-width:750px;margin:auto;}
     .btn{
       display:inline-block;
-      margin-top:25px;
-      padding:15px 40px;
+      margin-top:20px;
+      padding:14px 35px;
       background:#00ff99;
       color:#000;
       text-decoration:none;
       font-weight:bold;
       border-radius:30px;
+      cursor:pointer;
     }
-    section{padding:60px 20px;max-width:1100px;margin:auto;}
-    h2{text-align:center;margin-bottom:40px;font-size:2.2rem;}
+    section{padding:50px 20px;max-width:1100px;margin:auto;}
+    h2{text-align:center;margin-bottom:35px;font-size:2.2rem;}
     .grid{
       display:grid;
       grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
@@ -39,63 +40,71 @@
       padding:30px;
       border-radius:18px;
       box-shadow:0 15px 40px rgba(0,0,0,0.5);
+      text-align:center;
     }
     .card h3{color:#00ff99;margin-bottom:10px;}
+    .points{
+      text-align:center;
+      font-size:1.3rem;
+      margin:20px 0;
+    }
     footer{
       background:#050814;
       text-align:center;
-      padding:45px 20px;
+      padding:40px 20px;
     }
-    footer p{margin:6px 0;}
   </style>
 </head>
 <body><header>
   <h1>Play2Earn Arena</h1>
-  <p>Play fun online games, complete simple tasks, and earn points. Redeem your points manually through WhatsApp support.</p>
-  <a class="btn" href="https://wa.me/233547740795" target="_blank">Join & Start Playing</a>
-</header><section>
-  <h2>Available Games</h2>
+  <p>Play simple games, earn points, and redeem manually via WhatsApp. No fake promises — just fun and rewards.</p>
+  <a class="btn" href="#games">Start Playing</a>
+</header><div class="points">
+  Your Points: <span id="points">0</span>
+</div><section id="games">
+  <h2>Play Games</h2>
   <div class="grid">
     <div class="card">
-      <h3>Tap Challenge</h3>
-      <p>Tap the screen as fast as you can to score points.</p>
-      <p><strong>Reward:</strong> +10 Points</p>
-    </div>
-    <div class="card">
-      <h3>Memory Match</h3>
-      <p>Match cards correctly and earn points.</p>
-      <p><strong>Reward:</strong> +15 Points</p>
-    </div>
-    <div class="card">
-      <h3>Quiz Game</h3>
-      <p>Answer simple questions correctly.</p>
-      <p><strong>Reward:</strong> +20 Points</p>
-    </div>
+      <h3>Tap Game</h3>
+      <p>Tap the button to earn points.</p>
+      <button class="btn" onclick="addPoints(5)">Tap & Earn +5</button>
+    </div><div class="card">
+  <h3>Lucky Click</h3>
+  <p>Try your luck to earn points.</p>
+  <button class="btn" onclick="addPoints(10)">Play & Earn +10</button>
+</div>
+
+<div class="card">
+  <h3>Quiz Game</h3>
+  <p>Answer simple questions (demo).</p>
+  <button class="btn" onclick="addPoints(15)">Answer & Earn +15</button>
+</div>
+
   </div>
 </section><section>
   <h2>How It Works</h2>
   <div class="grid">
-    <div class="card">
-      <h3>1. Play Games</h3>
-      <p>Choose any game and start playing to earn points.</p>
-    </div>
-    <div class="card">
-      <h3>2. Earn Points</h3>
-      <p>Each completed game gives you points.</p>
-    </div>
-    <div class="card">
-      <h3>3. Redeem Manually</h3>
-      <p>When you reach the minimum points, contact support on WhatsApp.</p>
-    </div>
+    <div class="card"><p>1️⃣ Play games on this website.</p></div>
+    <div class="card"><p>2️⃣ Earn points automatically.</p></div>
+    <div class="card"><p>3️⃣ When ready, redeem via WhatsApp.</p></div>
   </div>
 </section><section>
-  <h2>Important Notice</h2>
+  <h2>Redeem Points</h2>
   <div class="card">
-    <p>This platform rewards users with points for entertainment purposes. Point redemption is handled manually via WhatsApp and subject to verification. No guaranteed income is promised.</p>
+    <p>When you reach enough points, contact support for manual redemption.</p>
+    <a class="btn" href="https://wa.me/233547740795" target="_blank">Redeem on WhatsApp</a>
   </div>
 </section><footer>
   <p>&copy; 2025 Play2Earn Arena</p>
-  <p>Support: WhatsApp 0547740795</p>
-  <a class="btn" href="https://wa.me/233547740795" target="_blank">Contact Support</a>
-</footer></body>
-</html>
+  <p>Support: 0547740795</p>
+</footer><script>
+  let points = localStorage.getItem('points') || 0;
+  document.getElementById('points').innerText = points;
+
+  function addPoints(value){
+    points = parseInt(points) + value;
+    localStorage.setItem('points', points);
+    document.getElementById('points').innerText = points;
+  }
+</script></body>
+ </html>
