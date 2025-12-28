@@ -14,11 +14,16 @@
     .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:25px}
     .card{background:#141a2e;padding:25px;border-radius:18px;box-shadow:0 10px 30px rgba(0,0,0,.5);text-align:center}
     footer{background:#050814;text-align:center;padding:40px 20px}
-    .points{text-align:center;font-size:1.2rem;margin:20px}/* Tap game */
-#gameArea{position:relative;height:400px;background:#0f1530;border-radius:15px;overflow:hidden}
-.coin{position:absolute;width:60px;height:60px;border-radius:50%;background:gold;display:flex;align-items:center;justify-content:center;font-weight:bold;color:#000;cursor:pointer}
-.meter{height:25px;background:#333;border-radius:15px;overflow:hidden;margin-top:15px}
+    .points{text-align:center;font-size:1.2rem;margin:20px}/* Magic Tile Game */
+#tileGame{position:relative;height:420px;background:linear-gradient(180deg,#0f2027,#203a43,#2c5364);border-radius:18px;overflow:hidden}
+.tile{position:absolute;width:80px;height:80px;border-radius:12px;background:rgba(255,255,255,0.15);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:bold;cursor:pointer;animation:float 6s infinite ease-in-out}
+@keyframes float{0%{transform:translateY(0)}50%{transform:translateY(-20px)}100%{transform:translateY(0)}}
+
+.meter{height:26px;background:#222;border-radius:20px;overflow:hidden;margin-top:20px}
 .meter-fill{height:100%;width:0%;background:linear-gradient(90deg,#00ff99,#ff9800)}
+
+.popup{position:fixed;inset:0;background:rgba(0,0,0,.7);display:none;align-items:center;justify-content:center}
+.popup-box{background:#141a2e;padding:30px;border-radius:20px;max-width:350px;text-align:center}
 
   </style>
 </head>
@@ -42,17 +47,23 @@
   </div>
 </section><section id="tapgame">
   <h2>Tap Coin Game</h2>
-  <p style="text-align:center">Tap the coins. Meter goes up fast but drops as you approach reward levels.</p>  <div id="gameArea"></div>  <div class="meter">
+  <p style="text-align:center">Tap the magic tiles. Progress never drops, but gains reduce as you approach rewards.</p>  <div id="tileGame"></div>  <div class="meter">
     <div class="meter-fill" id="meterFill"></div>
   </div>  <p style="text-align:center;margin-top:10px">Meter Value: <span id="meterValue">0</span></p>  <div class="card" style="margin-top:25px">
     <h3>Reward Levels (Manual)</h3>
     <p>1,000,000 points → ₵5 Airtime</p>
     <p>4,000,000 points → ₵7 Airtime</p>
     <p>6,000,000 points → ₵10 Airtime</p>
-    <p style="font-size:.9rem;opacity:.8">Rewards are manual and subject to verification.</p>
     <a class="btn" href="https://wa.me/233547740795" target="_blank">Redeem on WhatsApp</a>
   </div>
-</section><footer>
+</section><div class="popup" id="rewardPopup">
+  <div class="popup-box">
+    <h3>🎉 Reward Reached!</h3>
+    <p>You have reached a redeemable level.</p>
+    <button class="btn" onclick="redeemNow()">Redeem Now</button><br/><br/>
+    <button class="btn" style="background:#555;color:#fff" onclick="closePopup()">Continue Playing</button>
+  </div>
+</div><footer>
   <p>&copy; 2025 Play2Earn Arena</p>
   <p>Support: 0547740795</p>
 </footer><script>
@@ -63,7 +74,10 @@
   const pointsEl = document.getElementById('points');
   const meterEl = document.getElementById('meterValue');
   const fillEl = document.getElementById('meterFill');
-  const gameArea = document.getElementById('gameArea');
+  const gameArea = document.getElementById('tileGame');
+  const popup = document.getElementById('rewardPopup');
+
+  const rewardLevels = [1000000,4000000,6000000];
 
   function updateUI(){
     pointsEl.innerText = points;
@@ -71,37 +85,40 @@
     fillEl.style.width = Math.min((meter/maxMeter)*100,100) + '%';
     localStorage.setItem('points',points);
     localStorage.setItem('meter',meter);
+
+    if(rewardLevels.includes(meter)){
+      popup.style.display='flex';
+    }
   }
 
-  function spawnCoin(){
-    const coin = document.createElement('div');
-    coin.className = 'coin';
-    coin.innerText = '+';
-    coin.style.left = Math.random()*(gameArea.clientWidth-60)+'px';
-    coin.style.top = Math.random()*(gameArea.clientHeight-60)+'px';
+  function spawnTile(){
+    const tile = document.createElement('div');
+    tile.className = 'tile';
+    tile.innerText = '💎';
+    tile.style.left = Math.random()*(gameArea.clientWidth-80)+'px';
+    tile.style.top = Math.random()*(gameArea.clientHeight-80)+'px';
 
-    coin.onclick = () =>{
-      let gain = 5000;
-      if(meter > 800000) gain = 2000;
-      if(meter > 3000000) gain = 800;
-      if(meter > 5000000) gain = 200;
+    tile.onclick = ()=>{
+      let gain = 12000;
+      if(meter > 800000) gain = 6000;
+      if(meter > 3000000) gain = 2500;
+      if(meter > 5000000) gain = 800;
       meter += gain;
       points += 1;
-      coin.remove();
+      tile.remove();
       updateUI();
     };
 
-    gameArea.appendChild(coin);
-    setTimeout(()=>coin.remove(),2000);
+    gameArea.appendChild(tile);
+    setTimeout(()=>tile.remove(),4000);
   }
 
   setInterval(()=>{
-    if(document.getElementById('tapgame')){
-      spawnCoin();
-      meter = Math.max(0,meter-1500); // natural decrease
-      updateUI();
-    }
-  },800);
+    spawnTile();
+  },900);
+
+  function closePopup(){popup.style.display='none'}
+  function redeemNow(){window.open('https://wa.me/233547740795','_blank')}
 
   updateUI();
 </script></body>
